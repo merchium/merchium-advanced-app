@@ -1,0 +1,22 @@
+# IDEs
+.idea
+nbproject
+.buildpath
+.project
+.settings
+
+# Operating systems
+Thumbs.db
+.DS_Store
+
+# composer
+/vendor
+composer.phar
+composer.lock
+
+# phpunit
+phpunit.phar
+/phpunit.xml
+
+# App
+/config/db.php
