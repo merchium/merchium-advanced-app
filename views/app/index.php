@@ -32,8 +32,6 @@ $app_key = Yii::$app->params['appKey'];
 <div class="row">
 <div class="col-md-11">
 
-<h2>Merchium Advanced App</h2>
-
 <?= $this->render('/store/components/form', [
     'model' => $model,
     'hide_buttons_container' => true,

@@ -53,6 +53,11 @@ return [
     'Store: {store}' => 'Магазин: {store}',
     'Created At' => 'Создано',
     'Updated At' => 'Обновлено',
+    'Snowfall' => 'Снегопад',
     'Enable snowfall on storefront' => 'Включить снегопад в витрине',
+    'Snowfall' => 'Снегопад',
+    'Enable welcome popup' => 'Включить всплывающее окно приветствия',
+    'Welcome popup title' => 'Заголовок всплывающего окна',
+    'Welcome popup content' => 'Содержимое всплывающего окна',
 
 ];
