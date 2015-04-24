@@ -25,7 +25,7 @@ $form = ActiveForm::begin([
 
 // Fields list
 
-echo $form->field($model, 'enable_snow')->checkbox([], false);
+echo $form->field($model, 'snowfall_enable')->checkbox([], false);
 
 echo $form->field($model, 'welcome_popup_enable')->checkbox([], false);
 

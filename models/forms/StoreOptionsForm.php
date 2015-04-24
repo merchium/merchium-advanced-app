@@ -9,7 +9,7 @@ use app\models\StoreOption;
 
 class StoreOptionsForm extends Model
 {
-    public $enable_snow;
+    public $snowfall_enable;
     public $welcome_popup_enable;
     public $welcome_popup_title;
     public $welcome_popup_content;
@@ -29,7 +29,7 @@ class StoreOptionsForm extends Model
     public function attributeLabels()
     {
         return [
-            'enable_snow' => __('Enable snow on storefront'),
+            'snowfall_enable' => __('Enable snowfall on storefront'),
             'welcome_popup_enable' => __('Enable welcome popup'),
             'welcome_popup_title' => __('Welcome popup title'),
             'welcome_popup_content' => __('Welcome popup content'),
@@ -49,9 +49,12 @@ class StoreOptionsForm extends Model
     {
         $this->store = $store;
         
+        $attributes = $this->attributes();
         $options = $store->storeOptions;
         foreach ($options as $option) {
-            $this->{$option->name} = $option->value;
+            if (in_array($option->name, $attributes)) {
+                $this->{$option->name} = $option->value;
+            }
         }
     }
 

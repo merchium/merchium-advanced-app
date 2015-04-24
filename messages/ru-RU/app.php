@@ -53,5 +53,6 @@ return [
     'Store: {store}' => 'Магазин: {store}',
     'Created At' => 'Создано',
     'Updated At' => 'Обновлено',
+    'Enable snowfall on storefront' => 'Включить снегопад в витрине',
 
 ];
