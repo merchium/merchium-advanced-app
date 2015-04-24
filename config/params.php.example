@@ -1,0 +1,17 @@
+<?php
+
+return [
+
+    'adminEmail' => 'admin@example.com',
+    'applicationName' => 'Merchium Example App',
+    'companyName' => 'My Company',
+
+    'userPasswordResetTokenExpire' => 3600,
+
+    /**
+     * Application params - required
+     */
+    'appKey' => '',
+    'clientSecret' => '',
+
+];
