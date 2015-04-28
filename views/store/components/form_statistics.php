@@ -6,7 +6,7 @@ $stats = $store->getAddToCartStats();
 
 if ($stats) {
 
-    echo Html::tag('h3', 'Statistics');
+    echo Html::tag('h3', __('Statistics'));
 
     echo Html::beginTag('table', ['class' => 'table table-striped']);
     
