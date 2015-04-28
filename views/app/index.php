@@ -21,7 +21,7 @@ $app_key = Yii::$app->params['appKey'];
                     type: 'primary',
                     label: '<?= __('Save changes') ?>',
                     callback: function() {
-                        document.forms['store_options_form'].submit();
+                        document.forms['options_form'].submit();
                     }
                 }
             }

@@ -50,15 +50,16 @@ class Store extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStoreOptions()
+    public function getOptions()
     {
-        return $this->hasMany(StoreOption::className(), ['store_id' => 'id']);
+        return $this->hasMany(Option::className(), ['store_id' => 'id']);
     }
 
-    public function getStoreOptionsByName()
+    public function getOptionsByName()
     {
         $options_by_name = [];
-        foreach ($this->storeOptions as $option) {
+        $options = Option::findAll(['store_id' => $this->id]);
+        foreach ($options as $option) {
             $options_by_name[$option->name] = $option;
         }
         return $options_by_name;

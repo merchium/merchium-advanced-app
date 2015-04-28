@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\db\ActiveRecord;
-use app\models\StoreOption;
+use app\models\Option;
 
 class MerchiumClientBehavior extends Behavior
 {
@@ -43,7 +43,7 @@ class MerchiumClientBehavior extends Behavior
 
         $current_scheme = Yii::$app->request->isSecureConnection ? 'https' : 'http';
 
-        $options = $store->getStoreOptionsByName();
+        $options = $store->getOptionsByName();
 
         $scripts = [];
 
@@ -52,7 +52,7 @@ class MerchiumClientBehavior extends Behavior
             if (!empty($options['snowfall_script_tag_hash'])) {
                 $hash_option = $options['snowfall_script_tag_hash'];
             } else {
-                $hash_option = new StoreOption;
+                $hash_option = new Option;
                 $hash_option->name = 'snowfall_script_tag_hash';
                 $hash_option->link('store', $store);
             }
@@ -102,7 +102,7 @@ class MerchiumClientBehavior extends Behavior
             if ($options['welcome_popup_enable']->value) {
                 $welcome_popup_data = [
                     'title' => Html::encode($options['welcome_popup_title']->value),
-                    'content' => Html::encode($options['welcome_popup_content']->value),
+                    'content' => nl2br(Html::encode($options['welcome_popup_content']->value)),
                 ];
                 $welcome_popup_data_json = Json::encode($welcome_popup_data);
 
@@ -120,6 +120,18 @@ class MerchiumClientBehavior extends Behavior
                         }
                     });
                 ";
+            }
+
+        }
+
+        if (isset($options['add_to_cart_counter_enable'])) {
+
+            if ($options['add_to_cart_counter_enable']->value) {
+                $webhook_data = [
+
+                ];
+                $res = $client->getRequest('webhooks');
+                pd($res);
             }
 
         }

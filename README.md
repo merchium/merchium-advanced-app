@@ -81,7 +81,7 @@ http://localhost/merchium-advanced-app/requirements.php
 
 ### Database
 
-Edit the file `config/db.php` with real data, for example:
+Copy the file `config/db.php.example` into the `config/db.php` and edit them with real data. For example:
 
 ```php
 return [
@@ -109,7 +109,7 @@ Use following to apply mogrations:
 
 ### Merchium Application
 
-Edit the file `config/params.php` with real data, for example:
+Edit the file `config/params.php.example` into the `config/params.php` and edit them with real data. For example:
 
 ```php
 return [

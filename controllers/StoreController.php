@@ -8,9 +8,9 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use app\models\Store;
-use app\models\StoreOption;
+use app\models\Option;
 use app\models\search\StoreSearch;
-use app\models\forms\StoreOptionsForm;
+use app\models\forms\OptionsForm;
 
 class StoreController extends Controller
 {
@@ -24,6 +24,12 @@ class StoreController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['post'],
                 ],
             ],
         ];
@@ -63,7 +69,7 @@ class StoreController extends Controller
             return $this->redirect(['index']);
         } else {
 
-            $model = new StoreOptionsForm;
+            $model = new OptionsForm;
             $model->setStore($store);
                     
             $request = Yii::$app->request;

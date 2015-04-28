@@ -5,14 +5,15 @@ namespace app\models\forms;
 use Yii;
 use yii\base\Model;
 use app\models\Store;
-use app\models\StoreOption;
+use app\models\Option;
 
-class StoreOptionsForm extends Model
+class OptionsForm extends Model
 {
     public $snowfall_enable;
     public $welcome_popup_enable;
     public $welcome_popup_title;
     public $welcome_popup_content;
+    public $add_to_cart_counter_enable;
 
     protected $store;
 
@@ -33,6 +34,7 @@ class StoreOptionsForm extends Model
             'welcome_popup_enable' => __('Enable welcome popup'),
             'welcome_popup_title' => __('Welcome popup title'),
             'welcome_popup_content' => __('Welcome popup content'),
+            'add_to_cart_counter_enable' => __('Enable "add to cart" counter'),
         ];
     }
 
@@ -40,7 +42,7 @@ class StoreOptionsForm extends Model
     {
         parent::init();
 
-        // set default values
+        // Setting default values
         $this->welcome_popup_title = 'Welcome';
         $this->welcome_popup_content = 'Welcome content';
     }
@@ -50,7 +52,7 @@ class StoreOptionsForm extends Model
         $this->store = $store;
         
         $attributes = $this->attributes();
-        $options = $store->storeOptions;
+        $options = $store->options;
         foreach ($options as $option) {
             if (in_array($option->name, $attributes)) {
                 $this->{$option->name} = $option->value;
@@ -61,13 +63,13 @@ class StoreOptionsForm extends Model
     public function saveOptions()
     {
         if ($this->store->id) {
-            $options = $this->store->getStoreOptionsByName();
+            $options = $this->store->getOptionsByName();
 
             foreach ($this->attributes() as $attribute) {
                 if (!empty($options[$attribute])) {
                     $option = $options[$attribute];
                 } else {
-                    $option = new StoreOption;
+                    $option = new Option;
                     $option->link('store', $this->store);
                     $option->name = $attribute;
                 }

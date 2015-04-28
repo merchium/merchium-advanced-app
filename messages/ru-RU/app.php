@@ -57,7 +57,10 @@ return [
     'Enable snowfall on storefront' => 'Включить снегопад в витрине',
     'Snowfall' => 'Снегопад',
     'Enable welcome popup' => 'Включить всплывающее окно приветствия',
+    'Welcome popup' => 'Всплывающее окно приветствия',
     'Welcome popup title' => 'Заголовок всплывающего окна',
     'Welcome popup content' => 'Содержимое всплывающего окна',
+    'Enable "add to cart" counter' => 'Считать добавления продуктов в корзину',
+    'Statistics' => 'Статистика',
 
 ];

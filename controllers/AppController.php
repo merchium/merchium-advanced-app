@@ -7,8 +7,8 @@ use yii\web\Controller;
 use yii\web\UnauthorizedHttpException;
 use yii\web\NotFoundHttpException;
 use app\models\Store;
-use app\models\StoreOption;
-use app\models\forms\StoreOptionsForm;
+use app\models\Option;
+use app\models\forms\OptionsForm;
 
 class AppController extends Controller
 {
@@ -42,7 +42,7 @@ class AppController extends Controller
             && $store = Store::findOne(['domain' => $session->get('shop_domain')])
         ) {
             
-            $model = new StoreOptionsForm;
+            $model = new OptionsForm;
             $model->setStore($store);
         
             $request = Yii::$app->request;

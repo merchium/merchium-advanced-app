@@ -9,7 +9,7 @@ use app\widgets\ButtonsContatiner;
 
 $form = ActiveForm::begin([
     'options' => [
-        'name' => 'store_options_form',
+        'name' => 'options_form',
     ],
     'layout' => 'horizontal',
     'fieldConfig' => [
@@ -36,6 +36,10 @@ echo $form->field($model, 'welcome_popup_enable')->checkbox([], false);
 echo $form->field($model, 'welcome_popup_title');
 
 echo $form->field($model, 'welcome_popup_content')->textarea(['rows' => 4]);
+
+echo Html::tag('h3', __('Statistics'));
+
+echo $form->field($model, 'add_to_cart_counter_enable')->checkbox([], false);
 
 // \Fields list
 
