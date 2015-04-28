@@ -1,51 +1,32 @@
 <?php
 
-use yii\helpers\Html;
 use yii\bootstrap\Tabs;
-use kartik\date\DatePicker;
-use yii\bootstrap\ActiveForm;
-use app\widgets\ButtonsContatiner;
 
-
-$form = ActiveForm::begin([
-    'options' => [
-        'name' => 'options_form',
-    ],
-    'layout' => 'horizontal',
-    'fieldConfig' => [
-        'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
-        'horizontalCssClasses' => [
-            'label' => 'col-sm-3',
-            'wrapper' => 'col-sm-9',
-            'error' => '',
-            'hint' => '',
-        ],
-    ],
+$options_content = $this->render('form_options', [
+    'model' => $model,
+    'hide_buttons_container' => !empty($hide_buttons_container),
 ]);
 
-// Fields list
+if ($model->add_to_cart_counter_enable) { // Enable tabs
 
-echo Html::tag('h3', __('Snowfall'));
+    echo Tabs::widget([
+        'items' => [
+            [
+                'label' => __('General'),
+                'content' => $options_content,
+                'active' => true
+            ],
+            [
+                'label' => __('Statistics'),
+                'content' => $this->render('form_statistics', ['store' => $store]),
+                'options' => ['id' => 'myveryownID'],
+            ],
+        ],
+    ]);
 
-echo $form->field($model, 'snowfall_enable')->checkbox([], false);
+} else {
 
-echo Html::tag('h3', __('Welcome popup'));
+    echo $options_content;
 
-echo $form->field($model, 'welcome_popup_enable')->checkbox([], false);
-
-echo $form->field($model, 'welcome_popup_title');
-
-echo $form->field($model, 'welcome_popup_content')->textarea(['rows' => 4]);
-
-echo Html::tag('h3', __('Statistics'));
-
-echo $form->field($model, 'add_to_cart_counter_enable')->checkbox([], false);
-
-// \Fields list
-
-
-if (empty($hide_buttons_container)) {
-    echo ButtonsContatiner::widget(['model' => $model, 'removeLink' => false]);
 }
 
-ActiveForm::end();

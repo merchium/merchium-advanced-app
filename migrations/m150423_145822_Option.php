@@ -10,8 +10,8 @@ class m150423_145822_Option extends Migration
         $this->createTable('option', [
             'id' => Schema::TYPE_PK,
             'store_id' => Schema::TYPE_INTEGER . ' NOT NULL',
-            'name' => Schema::TYPE_STRING . ' NOT NULL',
-            'value' => Schema::TYPE_STRING,
+            'name' => Schema::TYPE_STRING . '(128) NOT NULL',
+            'value' => Schema::TYPE_TEXT,
         ]);
         $this->createIndex('store_name', 'option', ['store_id', 'name'], true);
         $this->addForeignKey('option_store', 'option', 'store_id', 'store', 'id', 'CASCADE', 'CASCADE');

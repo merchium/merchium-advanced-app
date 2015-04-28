@@ -50,27 +50,26 @@ class MerchiumClientBehavior extends Behavior
         if (isset($options['snowfall_enable'])) {
 
             if (!empty($options['snowfall_script_tag_hash'])) {
-                $hash_option = $options['snowfall_script_tag_hash'];
+                $option_hash = $options['snowfall_script_tag_hash'];
+                if ($option_hash->value) { // remove previos if exists
+                    $client->deleteRequest('script_tags/' . $option_hash->value);
+                }
             } else {
-                $hash_option = new Option;
-                $hash_option->name = 'snowfall_script_tag_hash';
-                $hash_option->link('store', $store);
+                $option_hash = new Option;
+                $option_hash->name = 'snowfall_script_tag_hash';
+                $option_hash->link('store', $store);
             }
 
             // Enable
             if ($options['snowfall_enable']->value) {
 
                 // Script tag
-                if ($hash_option->value) {
-                    // remove previos if exists
-                    $client->deleteRequest('script_tags/' . $hash_option->value);
-                }
                 $res = $client->createRequest('script_tags', [
                     'src' => Url::to('@web/js/lib/snowfall/snowfall.jquery.js', $current_scheme),
                 ]);
                 if (!empty($res['src_hash'])) {
-                    $hash_option->value = $res['src_hash'];
-                    $hash_option->save();
+                    $option_hash->value = $res['src_hash'];
+                    $option_hash->save();
                 }
 
                 // Template hook
@@ -90,9 +89,7 @@ class MerchiumClientBehavior extends Behavior
             // Disable
             } else {
                 
-                // Script tag
-                $client->deleteRequest('script_tags/' . $hash_option->value);
-                $hash_option->delete();
+                $option_hash->delete();
 
             }
         }
@@ -126,12 +123,32 @@ class MerchiumClientBehavior extends Behavior
 
         if (isset($options['add_to_cart_counter_enable'])) {
 
-            if ($options['add_to_cart_counter_enable']->value) {
-                $webhook_data = [
+            if (!empty($options['add_to_cart_counter_webhook_id'])) {
+                $option_webhook = $options['add_to_cart_counter_webhook_id'];
+                if ($option_webhook->value) { // remove previos if exists
+                    $client->deleteRequest('webhooks/' . $option_webhook->value);
+                }
+            } else {
+                $option_webhook = new Option;
+                $option_webhook->name = 'add_to_cart_counter_webhook_id';
+                $option_webhook->link('store', $store);
+            }
 
-                ];
-                $res = $client->getRequest('webhooks');
-                pd($res);
+            if ($options['add_to_cart_counter_enable']->value) {
+                
+                $res = $client->createRequest('webhooks', [
+                    'event' => 'add_to_cart',
+                    'url' => Url::to(['/webhook', 'store_id' => $store->id], $current_scheme),
+                ]);
+                if (!empty($res['webhook_id'])) {
+                    $option_webhook->value = $res['webhook_id'];
+                    $option_webhook->save();
+                }
+
+            } else {
+                
+                $option_webhook->delete();
+
             }
 
         }
@@ -153,6 +170,33 @@ class MerchiumClientBehavior extends Behavior
             $client->deleteRequest('template_hooks/index:scripts');
         }
 
+    }
+
+    public function getAddToCartStats()
+    {
+        $data = [];
+
+        $store = $this->owner;
+        $option = Option::findOne(['store_id' => $store->id, 'name' => 'add_to_cart_counter_statistics']);
+        if ($option) {
+            $stats = Json::decode($option->value);
+            if ($stats) {
+                arsort($stats);
+                $data = $stats;
+                $client = $this->getClient();
+                $product_ids = array_keys($stats);
+                $result = $client->getRequest('products', ['pid' => $product_ids]);
+                if (!empty($result['products'])) {
+                    $products = $result['products'];
+                    foreach ($products as $product) {
+                        $product['added_to_cart'] = $stats[$product['product_id']];
+                        $data[$product['product_id']] = $product;
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
 }

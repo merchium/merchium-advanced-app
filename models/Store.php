@@ -23,6 +23,7 @@ class Store extends ActiveRecord
     {
         return [
             'app\behaviors\MerchiumClientBehavior',
+            'app\behaviors\WebhookBehavior',
             'yii\behaviors\TimestampBehavior',
         ];
     }

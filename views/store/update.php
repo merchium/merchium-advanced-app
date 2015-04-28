@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $store->domain;
 
     <?= $this->render('components/form', [
         'model' => $model,
+        'store' => $store,
     ]) ?>
 
 </div>

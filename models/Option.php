@@ -33,7 +33,8 @@ class Option extends ActiveRecord
         return [
             [['store_id'], 'integer'],
             [['name'], 'required'],
-            [['name', 'value'], 'string', 'max' => 255]
+            [['name'], 'string', 'max' => 128],
+            [['value'], 'safe'],
         ];
     }
 

@@ -34,6 +34,7 @@ $app_key = Yii::$app->params['appKey'];
 
 <?= $this->render('/store/components/form', [
     'model' => $model,
+    'store' => $store,
     'hide_buttons_container' => true,
 ]) ?>
 

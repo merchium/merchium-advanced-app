@@ -7,7 +7,6 @@ use yii\web\Controller;
 use yii\web\UnauthorizedHttpException;
 use yii\web\NotFoundHttpException;
 use app\models\Store;
-use app\models\Option;
 use app\models\forms\OptionsForm;
 
 class AppController extends Controller
