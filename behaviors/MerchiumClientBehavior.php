@@ -47,6 +47,7 @@ class MerchiumClientBehavior extends Behavior
 
         $scripts = [];
 
+        // Snowfall
         if (isset($options['snowfall_enable'])) {
 
             if (!empty($options['snowfall_script_tag_hash'])) {
@@ -94,6 +95,7 @@ class MerchiumClientBehavior extends Behavior
             }
         }
 
+        // Welcome popup
         if (isset($options['welcome_popup_enable'])) {
 
             if ($options['welcome_popup_enable']->value) {
@@ -121,6 +123,7 @@ class MerchiumClientBehavior extends Behavior
 
         }
 
+        // "Add to cart" counter
         if (isset($options['add_to_cart_counter_enable'])) {
 
             if (!empty($options['add_to_cart_counter_webhook_id'])) {
@@ -148,6 +151,39 @@ class MerchiumClientBehavior extends Behavior
             } else {
                 
                 $option_webhook->delete();
+
+            }
+
+        }
+
+        // Payment
+        if (isset($options['payment_enable'])) {
+
+            if (!empty($options['payment_processor_id'])) {
+                $option_processor = $options['payment_processor_id'];
+                if ($option_processor->value) { // remove previos if exists
+                    $client->deleteRequest('payment_processors/' . $option_processor->value);
+                }
+            } else {
+                $option_processor = new Option;
+                $option_processor->name = 'payment_processor_id';
+                $option_processor->link('store', $store);
+            }
+
+            if ($options['payment_enable']->value) {
+                
+                $res = $client->createRequest('payment_processors', [
+                    'processor' => Yii::$app->params['applicationName'],
+                    'redirect_url' => Url::to(['/payment']),
+                ]);
+                if (!empty($res['processor_id'])) {
+                    $option_processor->value = $res['processor_id'];
+                    $option_processor->save();
+                }
+                
+            } else {
+                
+                $option_processor->delete();
 
             }
 

@@ -40,6 +40,10 @@ echo Html::tag('h3', __('Statistics'));
 
 echo $form->field($model, 'add_to_cart_counter_enable')->checkbox([], false);
 
+echo Html::tag('h3', __('Payment'));
+
+echo $form->field($model, 'payment_enable')->checkbox([], false);
+
 // \Fields list
 
 

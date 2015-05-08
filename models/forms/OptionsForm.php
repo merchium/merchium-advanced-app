@@ -14,6 +14,7 @@ class OptionsForm extends Model
     public $welcome_popup_title;
     public $welcome_popup_content;
     public $add_to_cart_counter_enable;
+    public $payment_enable;
 
     protected $store;
 
@@ -35,6 +36,7 @@ class OptionsForm extends Model
             'welcome_popup_title' => __('Welcome popup title'),
             'welcome_popup_content' => __('Welcome popup content'),
             'add_to_cart_counter_enable' => __('Enable "add to cart" counter'),
+            'payment_enable' => __('Enable payment'),
         ];
     }
 

@@ -13,7 +13,7 @@ $scheme = Yii::$app->request->isSecureConnection ? 'https' : 'http';
     <div class="jumbotron">
         <h1>Welcome</h1>
 
-        <p class="lead">Merchium Advanced Example Application</p>
+        <p class="lead"><?= $this->title ?></p>
     </div>
 
     <div class="body-content">
