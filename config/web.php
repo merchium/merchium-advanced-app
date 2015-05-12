@@ -8,6 +8,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'en-US', // Available: en-US, ru-RU
+    'language' => 'ru-RU',
     'components' => [
         'request' => [
             'cookieValidationKey' => 'YOURSECRETKEY',

@@ -62,5 +62,6 @@ return [
     'Welcome popup content' => 'Содержимое всплывающего окна',
     'Enable "add to cart" counter' => 'Считать добавления продуктов в корзину',
     'Statistics' => 'Статистика',
+    'Checkout' => 'Оплата',
 
 ];

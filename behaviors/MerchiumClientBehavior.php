@@ -174,7 +174,7 @@ class MerchiumClientBehavior extends Behavior
                 
                 $res = $client->createRequest('payment_processors', [
                     'processor' => Yii::$app->params['applicationName'],
-                    'redirect_url' => Url::to(['/payment']),
+                    'redirect_url' => Url::to(['/payment'], $current_scheme),
                 ]);
                 if (!empty($res['processor_id'])) {
                     $option_processor->value = $res['processor_id'];
