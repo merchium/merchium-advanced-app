@@ -63,5 +63,8 @@ return [
     'Enable "add to cart" counter' => 'Считать добавления продуктов в корзину',
     'Statistics' => 'Статистика',
     'Checkout' => 'Оплата',
+    'Cart' => 'Корзина',
+    'Payment' => 'Способ оплаты',
+    'Enable payment' => 'Включить способ оплаты',
 
 ];

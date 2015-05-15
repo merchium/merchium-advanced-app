@@ -72,8 +72,14 @@ class PaymentController extends Controller
         $option = $this->getOption($store_id, $order_id);
         $data = Json::decode($option->value);
         
-        // TODO
-        
+        $option->store->paymantNotifyRequest($data['notify_url'], [
+            'order_status' => 'P', // Processed
+            'pp_response' => [
+                'transaction_id' => 'EXA_' . $data['order_info']['order_id'] . '_MPLE',
+                'reason_text' => 'Example reason text: Ok',
+            ],
+        ]);
+
         $option->delete();
         
         return $this->redirect($data['return_url']);
@@ -83,8 +89,14 @@ class PaymentController extends Controller
     {
         $option = $this->getOption($store_id, $order_id);
         $data = Json::decode($option->value);
-
-        // TODO
+        
+        $option->store->paymantNotifyRequest($data['notify_url'], [
+            'order_status' => 'I', // Canceled
+            'pp_response' => [
+                'transaction_id' => 'EXA_' . $data['order_info']['order_id'] . '_MPLE',
+                'reason_text' => 'Example reason text',
+            ],
+        ]);
         
         $option->delete();
         

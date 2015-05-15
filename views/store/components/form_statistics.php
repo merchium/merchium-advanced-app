@@ -2,8 +2,12 @@
 
 use yii\helpers\Html;
 
-$stats = $store->getAddToCartStats();
 
+echo Html::tag('h3', __('Cart'));
+
+echo $form->field($model, 'add_to_cart_counter_enable')->checkbox([], false);
+
+$stats = $store->getAddToCartStats();
 if ($stats) {
 
     echo Html::tag('h3', __('Statistics'));

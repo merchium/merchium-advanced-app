@@ -1,32 +1,56 @@
 <?php
 
+use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
+use app\widgets\ButtonsContatiner;
 
-$options_content = $this->render('form_options', [
-    'model' => $model,
-    'hide_buttons_container' => !empty($hide_buttons_container),
+$form = ActiveForm::begin([
+    'options' => [
+        'name' => 'options_form',
+    ],
+    'layout' => 'horizontal',
+    'fieldConfig' => [
+        'template' => "{label}\n{beginWrapper}\n{input}\n{hint}\n{error}\n{endWrapper}",
+        'horizontalCssClasses' => [
+            'label' => 'col-sm-3',
+            'wrapper' => 'col-sm-9',
+            'error' => '',
+            'hint' => '',
+        ],
+    ],
 ]);
 
-if ($model->add_to_cart_counter_enable) { // Enable tabs
-
-    echo Tabs::widget([
-        'items' => [
-            [
-                'label' => __('General'),
-                'content' => $options_content,
-                'active' => true
-            ],
-            [
-                'label' => __('Statistics'),
-                'content' => $this->render('form_statistics', ['store' => $store]),
-                'options' => ['id' => 'myveryownID'],
-            ],
+echo Tabs::widget([
+    'items' => [
+        [
+            'label' => __('General'),
+            'content' => $this->render('form_general', [
+                'model' => $model,
+                'form' => $form,
+            ]),
+            'active' => true
         ],
-    ]);
+        [
+            'label' => __('Cart'),
+            'content' => $this->render('form_statistics', [
+                'model' => $model,
+                'form' => $form,
+                'store' => $store
+            ]),
+        ],
+        [
+            'label' => __('Payment'),
+            'content' => $this->render('form_payment', [
+                'model' => $model,
+                'form' => $form,
+                'store' => $store
+            ]),
+        ],
+    ],
+]);
 
-} else {
-
-    echo $options_content;
-
+if (empty($hide_buttons_container)) {
+    echo ButtonsContatiner::widget(['model' => $model, 'removeLink' => false]);
 }
 
+ActiveForm::end();

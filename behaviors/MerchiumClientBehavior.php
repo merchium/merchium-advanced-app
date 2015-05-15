@@ -36,6 +36,21 @@ class MerchiumClientBehavior extends Behavior
         return $this->client;
     }
 
+    public function paymantNotifyRequest($url, $data)
+    {
+        $delimiter = strpos($url, '?') ? '&' : '?';
+        $notify_url = $url . $delimiter . http_build_query($data);
+        $notify_url .= '&signature=' . $this->getClient()->calculateSignature($notify_url);
+        
+        $result = file_get_contents($notify_url);
+        
+        $decoded = json_decode($result, true);
+        if ($decoded) {
+            return $decoded;
+        }
+        return false;
+    }
+
     public function updateHooks($event)
     {
         $store = $this->owner;
@@ -159,31 +174,34 @@ class MerchiumClientBehavior extends Behavior
         // Payment
         if (isset($options['payment_enable'])) {
 
-            if (!empty($options['payment_processor_id'])) {
-                $option_processor = $options['payment_processor_id'];
-                if ($option_processor->value) { // remove previos if exists
-                    $client->deleteRequest('payment_processors/' . $option_processor->value);
-                }
-            } else {
-                $option_processor = new Option;
-                $option_processor->name = 'payment_processor_id';
-                $option_processor->link('store', $store);
-            }
-
             if ($options['payment_enable']->value) {
                 
-                $res = $client->createRequest('payment_processors', [
+                $data = [
                     'processor' => Yii::$app->params['applicationName'],
                     'redirect_url' => Url::to(['/payment'], $current_scheme),
-                ]);
-                if (!empty($res['processor_id'])) {
-                    $option_processor->value = $res['processor_id'];
-                    $option_processor->save();
+                ];
+
+                if (!empty($options['payment_processor_id'])) { // Update
+                    $client->updateRequest('payment_processors/' . $options['payment_processor_id']->value, $data);
+                
+                } else { // Create
+                    $res = $client->createRequest('payment_processors', $data);
+                    if (!empty($res['processor_id'])) {
+                        $option_processor = new Option;
+                        $option_processor->link('store', $store);
+                        $option_processor->name = 'payment_processor_id';
+                        $option_processor->value = $res['processor_id'];
+                        $option_processor->save();
+                    }
+                
                 }
                 
             } else {
                 
-                $option_processor->delete();
+                if (!empty($options['payment_processor_id'])) {
+                    $client->deleteRequest('payment_processors/' . $options['payment_processor_id']->value);
+                    $options['payment_processor_id']->delete();
+                }
 
             }
 
