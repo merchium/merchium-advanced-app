@@ -1,5 +1,5 @@
 Merchium Advanced App
-================================
+=====================
 
 Based on Yii 2 Basic Application Template.
 
@@ -127,3 +127,22 @@ return [
 
 ];
 ```
+
+
+FUNCTIONALITY
+-------------
+
+1. Snowfall
+2. Welcome popup
+3. "Add to cart" counter
+4. Example payment
+
+
+MERCHIUM: TECHNOLOGY USED
+-------------------------
+
+1. Script Tags
+2. Template Hooks
+3. Webhooks
+4. Payment Processors
+
