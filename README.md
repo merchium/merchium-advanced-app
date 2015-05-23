@@ -109,7 +109,7 @@ Use following to apply mogrations:
 
 ### Merchium Application
 
-Edit the file `config/params.php.example` into the `config/params.php` and edit them with real data. For example:
+Copy the file `config/params.php.example` into the `config/params.php` and edit them with real data. For example:
 
 ```php
 return [

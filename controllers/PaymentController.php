@@ -20,13 +20,13 @@ class PaymentController extends Controller
         if ($data) {
 
             if (empty($data['shop_domain'])) {
-                throw new BadRequestHttpException("Shop domain not pass");
+                throw new BadRequestHttpException("Shop domain is missing");
             } elseif (empty($data['order_info']['order_id'])) {
-                throw new BadRequestHttpException("Order ID not pass");
+                throw new BadRequestHttpException("Order ID is missing");
             } elseif (empty($data['return_url'])) {
-                throw new BadRequestHttpException("Return Url not pass");
+                throw new BadRequestHttpException("Return Url is missing");
             } elseif (empty($data['cancel_url'])) {
-                throw new BadRequestHttpException("Cancel Url not pass");
+                throw new BadRequestHttpException("Cancel Url is missing");
             }
             
             $store = Store::findOne(['domain' => $data['shop_domain']]);
