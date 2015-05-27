@@ -14,6 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= ActionsDropdown::widget([
             'layout' => 'info',
             'items' => [
+                ['label' => __('Send admin notification'), 'url' => Url::to(['admin-notification']), 'linkOptions' => [
+                    'data-c-process-items' => 'ids',
+                ]],
                 ['label' => __('Delete selected'), 'url' => Url::to(['delete']), 'linkOptions' => [
                     'data-c-process-items' => 'ids',
                     'data-confirm' => __('Are you sure you want to delete selected items?'),
@@ -37,7 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
             'updated_at:datetime',
 
-            ['class' => 'app\widgets\grid\ActionColumn', 'size' => 'xs'],
+            [
+                'class' => 'app\widgets\grid\ActionColumn',
+                'size' => 'xs',
+                'extraItems' => [
+                    ['action' => 'admin-notification', 'idField' => 'ids', 'label' => __('Send admin notification')],
+                ],
+            ],
         ],
     ]); ?>
 

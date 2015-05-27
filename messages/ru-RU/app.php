@@ -66,5 +66,18 @@ return [
     'Cart' => 'Корзина',
     'Payment' => 'Способ оплаты',
     'Enable payment' => 'Включить способ оплаты',
+    'Send admin notification' => 'Отправить уведомление администратору',
+    'Admin notification was send.' => 'Уведомление администратору было отправлено.',
+    'Type' => 'Тип',
+    'Title' => 'Заголовок',
+    'Message' => 'Сообщение',
+    'Message state' => 'Состояние',
+    'Error' => 'Обишка',
+    'Warning' => 'Предупреждение',
+    'Notice' => 'Уведомление',
+    'Info' => 'Инфо',
+    "Notification will be displayed unless it's closed" => 'Уведомление будет отображаться до тех пор, пока его не закроют',
+    'Only once' => 'Только раз',
+    'Will be closed by timer' => 'Будет закрыто автоматически по таймеру',
 
 ];

@@ -11,6 +11,7 @@ use app\models\Store;
 use app\models\Option;
 use app\models\search\StoreSearch;
 use app\models\forms\OptionsForm;
+use app\models\forms\AdminNotificationForm;
 
 class StoreController extends Controller
 {
@@ -116,6 +117,22 @@ class StoreController extends Controller
         }
 
         return $this->redirect(['index']);
+    }
+
+    public function actionAdminNotification(array $ids)
+    {
+        $model = new AdminNotificationForm();
+        $model->store_ids = $ids;
+        if ($model->load(Yii::$app->request->post()) && $model->send()) {
+            $ok_message = __('Admin notification was send.');
+            return $this->redirect(['/store/index']);
+        } else {
+            $stores = Store::findAll(['id' => $ids]);
+            return $this->render('admin-notification', [
+                'model'  => $model,
+                'stores' => $stores,
+            ]);
+        }
     }
 
     /**

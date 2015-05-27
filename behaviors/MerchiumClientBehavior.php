@@ -36,6 +36,19 @@ class MerchiumClientBehavior extends Behavior
         return $this->client;
     }
 
+    public function sendAdminNotification($type, $message, $title = '', $message_state = '')
+    {
+        $store = $this->owner;
+        $client = $this->getClient();
+
+        $client->createRequest('admin_notifications', [
+            'type'          => $type,
+            'title'         => $title,
+            'message'       => $message,
+            'message_state' => $message_state,
+        ]);
+    }
+
     public function paymantNotifyRequest($url, $data)
     {
         $delimiter = strpos($url, '?') ? '&' : '?';
