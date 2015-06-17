@@ -1,148 +1,150 @@
 Merchium Advanced App
 =====================
 
-Based on Yii 2 Basic Application Template.
+Example app for Merchium that demonstrates the use of [external JavaScript](https://docs.google.com/document/d/1xxKaQ2J-oHGnL2TZGGRbKGwxg94ZDeOcAARL6JWHEl8/edit), [external HTML/Smarty content](https://docs.google.com/document/d/13XUTMq7AxbRMK26PCzGHQHULeeF4yOYEa17d0MPHj3U/edit), [webhooks](https://docs.google.com/document/d/13XUTMq7AxbRMK26PCzGHQHULeeF4yOYEa17d0MPHj3U/edit), and [payment service integration](https://docs.google.com/document/d/1tDJWZgzEjtUHmp4RfsTY36Vr-ObhL_53H6dPhhKXNXE/edit).
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+The app implements the following features:
 
+	1. Snowfall for the storefront
+	1. Welcome popup
+	1. The "Add to cart" counter
+	1. Example payment
 
-DIRECTORY STRUCTURE
--------------------
+The app is based on the [Yii 2 Basic Application Template](https://github.com/yiisoft/yii2-app-basic).
 
-      assets/             contains assets definition
-      behaviors/          contains behaviors definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
-      widgets/            contains widgets for view files for the Web application
-
-
-
-REQUIREMENTS
+Requirements
 ------------
 
-The minimum requirement by this application template that your Web server supports PHP 5.4.0.
+PHP 5.4.0 and SQLite.
 
+Check the requirements with `php requirements.php`.
 
-INSTALLATION
+Install
+-------
+
+1. Clone repo and switch to the app directory:
+
+	```bash
+	$ git clone https://github.com/merchium/merchium-advanced-app.git
+	$ cd merchium-advanced-app
+	```
+
+1. [Install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
+
+1. Install the plugin and dependencies by running the following command:
+
+```bash
+$ composer global require "fxp/composer-asset-plugin:1.0.0"
+
+$ composer update
+```
+
+or
+
+```bash
+$ php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
+
+$ php composer update
+```
+
+Configure DB
 ------------
 
-Clone repo:
+1. Create a DB config from the provided example:
+	
+	```bash
+	$ cp config/db.php.example config/db.php
+	```
+
+1. Edit the DB config (empty merchium_advanced_app.db is in the app directory):
+
+	```php
+	<?php
+
+	return [
+		'class' => 'yii\db\Connection',
+		'dsn' => 'sqlite:/absolute/path/to/merchium_advanced_app.db',
+		'charset' => 'utf8',
+	];
+	```
+
+1. Apply migrations:
+
+	```bash
+	$ php yii migrate
+	```
+
+Launch
+------
+
+1. Run PHP's built-in dev server:
 
 ```bash
-git clone git@github.com:merchium/merchium-advanced-app.git
+php -S localhost:8000
 ```
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+1. Open your browser and go to `http://localhost:8000/web`.
 
-Install composer plugin using the following command:
+Create a Merchium Marketplace App
+---------------------------------
 
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
-~~~
+1. Go to http://localhost:8000/web/index.php?r=site%2Flogin and login to the dashbpard with username *admin* and password *admin*.
 
-Install composer dependencies
+You'll see the apps' admin panel and install page URLs.
 
-~~~
-php composer update
-~~~
+1. Open your [Merchium partner page](http://marketplace.merchium.com/partner.php) on a new tab and [create an app](https://docs.google.com/document/d/1mU7cJTNlXuaiGIQ645gxu8XonV0xm7sGnKsjdJESxxs/edit#heading=h.92nl0c1q6xrh). Use the admin panel and install page URLs from the dashboard.
 
-You can then access the application through the following URL:
+On the app page in your Merchium partner page, you'll see the App key and Client secret values.
 
-~~~
-http://localhost/merchium-advanced-app/web/
-~~~
+1. Create a config from the provided example:
 
+	```bash
+	$ cp config/params.php.example config/params.php
+	```
 
-CONFIGURATION
--------------
+1. Open `config/params.php` and paste the App key and Client secret values from the Merchium partner page into the respective params:
 
-### Check requirements
+	```php
+	<?php
 
-Console:
-```bash
-php requirements.php
-```
+	return [
 
-Web:
-~~~
-http://localhost/merchium-advanced-app/requirements.php
-~~~
+		'adminEmail' => 'admin@example.com',
+		'applicationName' => 'Merchium Example App',
+		'companyName' => 'My Company',
 
-### Database
+		'userPasswordResetTokenExpire' => 3600,
 
-Copy the file `config/db.php.example` into the `config/db.php` and edit them with real data. For example:
+		/**
+		 * Application params - required
+		 */
+		'appKey' => 'APPKEY12345',
+		'clientSecret' => 'CLIENTSECRET12345',
 
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=merchium_advanced_app',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
-```
+	];
+	```
+1. Restart the server to apply the new params.
 
-**NOTE:** Yii won't create the database for you, this has to be done manually before you can access it.
+Install the App in a Dev Store
+------------------------------
 
-Use following to create database
+1. [Create a dev store](https://docs.google.com/document/d/1mU7cJTNlXuaiGIQ645gxu8XonV0xm7sGnKsjdJESxxs/edit#heading=h.qp62dajl6jj5) in your Merchium partner panel.
 
-```sql
-CREATE DATABASE merchium_advanced_app CHARACTER SET utf8;
-```
+1. Go to the app page and [install it to the dev store](https://docs.google.com/document/d/1DrNs_ae2YlyY-I0argpUHmcVEFr3Ta3-Mrl47cWeYp0/edit#heading=h.4si4ojwgrtgl).
 
-Use following to apply mogrations:
+Directories
+-----------
 
-```bash
-./yii migrate
-```
-
-### Merchium Application
-
-Copy the file `config/params.php.example` into the `config/params.php` and edit them with real data. For example:
-
-```php
-return [
-    'adminEmail' => 'admin@example.com',
-    'applicationName' => 'Merchium Example App',
-    'companyName' => 'My Company',
-
-    'userPasswordResetTokenExpire' => 3600,
-
-    /**
-     * Application params - required
-     */
-    'appKey' => '8K7P5D0G2u6u5C4r7W0S5y4y4X5n7e9z',
-    'clientSecret' => '1n3t6n6n9u2G5u3i2r8V6R5M7u5u0F2q',
-
-];
-```
-
-
-FUNCTIONALITY
--------------
-
-1. Snowfall
-2. Welcome popup
-3. "Add to cart" counter
-4. Example payment
-
-
-MERCHIUM: TECHNOLOGY USED
--------------------------
-
-1. Script Tags
-2. Template Hooks
-3. Webhooks
-4. Payment Processors
-
+	assets/             assets definition
+	behaviors/          behaviors definition
+	commands/           console commands (controllers)
+	config/             application configurations
+	controllers/        Web controller classes
+	mail/               view files for e-mails
+	models/             model classes
+	runtime/            files generated during runtime
+	tests/              various tests for the basic application
+	vendor/             dependent 3rd-party packages
+	views/              view files for the Web application
+	web/                the entry script and Web resources
+	widgets/            widgets for view files for the Web application
