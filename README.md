@@ -69,12 +69,12 @@ Configure DB
 
 	return [
 		'class' => 'yii\db\Connection',
-		'dsn' => 'sqlite:/absolute/path/to/merchium_advanced_app.db',
+		'dsn' => 'sqlite:/absolute/path/to/sqlite.db',
 		'charset' => 'utf8',
 	];
 	```
 
-1. Apply migrations:
+1. Apply migrations (if MySQL):
 
 	```bash
 	$ php yii migrate

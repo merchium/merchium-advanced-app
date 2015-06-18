@@ -1,5 +1,13 @@
 <?php
 
+// SQLite
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'sqlite:/var/www/html/sqlite.db.example',
+    'charset' => 'utf8',
+];
+
+// MySQL
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=merchium_advanced_app',
