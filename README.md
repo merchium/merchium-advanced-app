@@ -15,7 +15,7 @@ The app is based on the [Yii 2 Basic Application Template](https://github.com/yi
 Requirements
 ------------
 
-PHP 5.4.0 and SQLite.
+PHP 5.4.0 and SQLite. For local testing [ngrok](https://ngrok.com/) is used.
 
 Check the requirements with `php requirements.php`.
 
@@ -85,16 +85,25 @@ Launch
 
 1. Run PHP's built-in dev server:
 
-```bash
-php -S localhost:8000
-```
+	```bash
+	php -S 127.0.0.1:8000
+	```
 
-1. Open your browser and go to `http://localhost:8000/web`.
+1. Use ngrok to get an https URL pointing to your server:
+
+	```bash
+	$ ngrok 8000
+	...
+	Forwarding                    https://3cd89e8a.ngrok.com -> 127.0.0.1:8000
+	...
+	```
+
+1. Open your browser and go to https://3cd89e8a.ngrok.com/web.
 
 Create a Merchium Marketplace App
 ---------------------------------
 
-1. Go to http://localhost:8000/web/index.php?r=site%2Flogin and login to the dashbpard with username *admin* and password *admin*.
+1. Go to https://3cd89e8a.ngrok.com/web/index.php?r=site%2Flogin and login to the dashbpard with username *admin* and password *admin*.
 
 You'll see the apps' admin panel and install page URLs.
 
