@@ -50,6 +50,12 @@ $ php composer update
 Configure DB
 ------------
 
+1. Create a DB file from the provided empty template:
+
+	```bash
+	$ cp empty.db merchium_advanced_app.db
+	```
+
 1. Create a DB config from the provided example:
 	
 	```bash
