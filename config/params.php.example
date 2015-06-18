@@ -9,7 +9,7 @@ return [
     'userPasswordResetTokenExpire' => 3600,
 
     /**
-     * Application params - required
+     * Application params. Required for installation.
      */
     'appKey' => '',
     'clientSecret' => '',

@@ -15,7 +15,9 @@ The app is based on the [Yii 2 Basic Application Template](https://github.com/yi
 Requirements
 ------------
 
-PHP 5.4.0 and SQLite. For local testing [ngrok](https://ngrok.com/) is used.
+PHP 5.4.0 and a web server supporting it.
+
+In the example below we'll use PHP's built-in server, SQLite, and [ngrok](https://ngrok.com/). You can use MySQL or any other database.
 
 Check the requirements with `php requirements.php`.
 
@@ -33,28 +35,14 @@ Install
 
 1. Install the plugin and dependencies by running the following command:
 
-```bash
-$ composer global require "fxp/composer-asset-plugin:1.0.0"
+	```bash
+	$ composer global require "fxp/composer-asset-plugin:1.0.0"
 
-$ composer update
-```
-
-or
-
-```bash
-$ php composer.phar global require "fxp/composer-asset-plugin:1.0.0"
-
-$ php composer update
-```
+	$ composer update
+	```
 
 Configure DB
 ------------
-
-1. Create a DB file from the provided empty template:
-
-	```bash
-	$ cp empty.db merchium_advanced_app.db
-	```
 
 1. Create a DB config from the provided example:
 	
@@ -62,7 +50,7 @@ Configure DB
 	$ cp config/db.php.example config/db.php
 	```
 
-1. Edit the DB config (empty merchium_advanced_app.db is in the app directory):
+1. Edit the DB config (note that the DB path must be absolute):
 
 	```php
 	<?php
@@ -74,11 +62,11 @@ Configure DB
 	];
 	```
 
-1. Apply migrations (if MySQL):
+**Note:** The DB template sqlite.db already has some data. If you're starting from scratch or using a different database (e.g. MySQL), apply the migrations:
 
-	```bash
-	$ php yii migrate
-	```
+```bash
+$ php yii migrate
+```
 
 Launch
 ------
@@ -131,7 +119,7 @@ On the app page in your Merchium partner page, you'll see the App key and Client
 		'userPasswordResetTokenExpire' => 3600,
 
 		/**
-		 * Application params - required
+		 * Application params. Required for installation.
 		 */
 		'appKey' => 'APPKEY12345',
 		'clientSecret' => 'CLIENTSECRET12345',
