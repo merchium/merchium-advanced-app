@@ -103,9 +103,9 @@ Launch
 Create a Merchium Marketplace App
 ---------------------------------
 
-1. Go to https://3cd89e8a.ngrok.com/web/index.php?r=site%2Flogin and login to the dashbpard with username *admin* and password *admin*.
+1. Go to https://3cd89e8a.ngrok.com/web/index.php?r=site%2Flogin and login to the dashboard with username *admin* and password *admin*.
 
-You'll see the apps' admin panel and install page URLs.
+You'll see the app's admin panel and install page URLs.
 
 1. Open your [Merchium partner page](http://marketplace.merchium.com/partner.php) on a new tab and [create an app](https://docs.google.com/document/d/1mU7cJTNlXuaiGIQ645gxu8XonV0xm7sGnKsjdJESxxs/edit#heading=h.92nl0c1q6xrh). Use the admin panel and install page URLs from the dashboard.
 
