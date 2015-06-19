@@ -72,8 +72,8 @@ class OptionsForm extends Model
                     $option = $options[$attribute];
                 } else {
                     $option = new Option;
-                    $option->link('store', $this->store);
                     $option->name = $attribute;
+                    $option->link('store', $this->store);
                 }
                 $option->value = $this->{$attribute};
                 $option->save();
