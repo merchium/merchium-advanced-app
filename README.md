@@ -80,7 +80,7 @@ Launch
 1. Use ngrok to get an https URL pointing to your server:
 
 	```bash
-	$ ngrok 8000
+	$ ngrok http 8000
 	...
 	Forwarding                    https://3cd89e8a.ngrok.com -> 127.0.0.1:8000
 	...
