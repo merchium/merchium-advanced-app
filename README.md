@@ -74,7 +74,7 @@ Launch
 1. Run PHP's built-in dev server:
 
 	```bash
-	php -S 127.0.0.1:8000
+	php -S localhost:8000
 	```
 
 1. Use ngrok to get an https URL pointing to your server:
