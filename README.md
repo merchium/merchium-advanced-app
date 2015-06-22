@@ -97,6 +97,13 @@ You'll see the app's admin panel and install page URLs.
 
 1. Open your [Merchium partner page](http://marketplace.merchium.com/partner.php) on a new tab and [create an app](https://docs.google.com/document/d/1mU7cJTNlXuaiGIQ645gxu8XonV0xm7sGnKsjdJESxxs/edit#heading=h.92nl0c1q6xrh). Use the admin panel and install page URLs from the dashboard.
 
+1. Switch to **App permissions** and check the following permissions:
+
+	- View, create, edit, and delete custom script connections (ScriptTags)
+	- View, create, edit, and delete custom HTML and Smarty 3 content connections to hooks (TemplateHooks)
+	- View, create, edit, and delete payment processors (PaymentProcessors)
+	- Create, edit, and delete webhooks (Webhooks)
+
 On the app page in your Merchium partner page, you'll see the App key and Client secret values.
 
 1. Create a config from the provided example:
