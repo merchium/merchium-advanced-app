@@ -44,6 +44,12 @@ Install
 Configure DB
 ------------
 
+1. Create a DB from the provided example:
+
+    ```bash
+    $ cp sqlite.db merchium-advanced-app.db
+    ```
+
 1. Create a DB config from the provided example:
 	
 	```bash
@@ -57,7 +63,7 @@ Configure DB
 
 	return [
 		'class' => 'yii\db\Connection',
-		'dsn' => 'sqlite:/absolute/path/to/sqlite.db',
+		'dsn' => 'sqlite:/absolute/path/to/merchium-advanced-app.db',
 		'charset' => 'utf8',
 	];
 	```
