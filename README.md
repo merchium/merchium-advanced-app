@@ -1,7 +1,7 @@
 Merchium Advanced App
 =====================
 
-Example app for Merchium that demonstrates the use of [external JavaScript](https://docs.google.com/document/d/1xxKaQ2J-oHGnL2TZGGRbKGwxg94ZDeOcAARL6JWHEl8/edit), [external HTML/Smarty content](https://docs.google.com/document/d/13XUTMq7AxbRMK26PCzGHQHULeeF4yOYEa17d0MPHj3U/edit), [webhooks](https://docs.google.com/document/d/13XUTMq7AxbRMK26PCzGHQHULeeF4yOYEa17d0MPHj3U/edit), and [payment service integration](https://docs.google.com/document/d/1tDJWZgzEjtUHmp4RfsTY36Vr-ObhL_53H6dPhhKXNXE/edit).
+Example app for Merchium that demonstrates the use of [external JavaScript](https://docs.google.com/document/d/1xxKaQ2J-oHGnL2TZGGRbKGwxg94ZDeOcAARL6JWHEl8/edit), [external HTML/Smarty content](https://docs.google.com/document/d/13XUTMq7AxbRMK26PCzGHQHULeeF4yOYEa17d0MPHj3U/edit), [webhooks](https://docs.google.com/document/d/1g6yqDj0l2FfBHx1OHZ5icP2pVV1tLMo9d5oQ5MI75HQ/edit), and [payment service integration](https://docs.google.com/document/d/1tDJWZgzEjtUHmp4RfsTY36Vr-ObhL_53H6dPhhKXNXE/edit).
 
 The app implements the following features:
 
@@ -92,8 +92,6 @@ Launch
 	...
 	```
 
-1. Open your browser and go to https://3cd89e8a.ngrok.com/web.
-
 Create a Merchium Marketplace App
 ---------------------------------
 
@@ -109,8 +107,6 @@ You'll see the app's admin panel and install page URLs.
 	- View, create, edit, and delete custom HTML and Smarty 3 content connections to hooks (TemplateHooks)
 	- View, create, edit, and delete payment processors (PaymentProcessors)
 	- Create, edit, and delete webhooks (Webhooks)
-
-On the app page in your Merchium partner page, you'll see the App key and Client secret values.
 
 1. Create a config from the provided example:
 
