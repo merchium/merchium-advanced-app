@@ -21,3 +21,5 @@ phpunit.phar
 # App
 /config/db.php
 /config/params.php
+
+merchium-advanced-app.db
