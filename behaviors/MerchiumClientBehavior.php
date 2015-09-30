@@ -201,9 +201,9 @@ class MerchiumClientBehavior extends Behavior
                     $res = $client->createRequest('payment_processors', $data);
                     if (!empty($res['processor_id'])) {
                         $option_processor = new Option;
-                        $option_processor->link('store', $store);
                         $option_processor->name = 'payment_processor_id';
                         $option_processor->value = $res['processor_id'];
+                        $option_processor->link('store', $store);
                         $option_processor->save();
                     }
                 
@@ -221,20 +221,41 @@ class MerchiumClientBehavior extends Behavior
         }
 
         if ($scripts) {
-            $client->createRequest('template_hooks', [
-                'hookname' => 'index:scripts',
-                'type' => 'post',
-                'body' => '
-                    {literal}
-                    <script type="text/javascript">
-                    (function(_, $) {
-                    ' . implode(PHP_EOL, $scripts) . '
-                    }(Tygh, Tygh.$));
-                    </script>
-                    {/literal}',
-            ]);
+            $body = 
+                '{literal}'
+                . '<script type="text/javascript">'
+                . '(function(_, $) {'
+                . implode(PHP_EOL, $scripts)
+                . '}(Tygh, Tygh.$));'
+                . '</script>'
+                . '{/literal}';
+            if (!empty($options['scripts_hook_id'])) {
+                // Update
+                $client->updateRequest('template_hooks/' . $options['scripts_hook_id']->value, [
+                    'body' => $body,
+                ]);
+            } else {
+                // Create
+                $res = $client->createRequest('template_hooks', [
+                    'hookname' => 'index:scripts',
+                    'type' => 'post',
+                    'body' => $body,
+                ]);
+                if (!empty($res['hook_id'])) {
+                    $option_hook = new Option;
+                    $option_hook->name = 'scripts_hook_id';
+                    $option_hook->value = $res['hook_id'];
+                    $option_hook->link('store', $store);
+                    $option_hook->save();
+                }
+            }
         } else {
-            $client->deleteRequest('template_hooks/index:scripts');
+            
+            if (!empty($options['scripts_hook_id'])) {
+                $client->deleteRequest('template_hooks/' . $options['scripts_hook_id']->value);
+                $options['scripts_hook_id']->delete();
+            }
+
         }
 
     }
