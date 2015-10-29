@@ -37,8 +37,14 @@ Install
 
 	```bash
 	$ composer global require "fxp/composer-asset-plugin:1.0.0"
-
 	$ composer update
+	```
+
+1. Set access permissions for certain directories:
+
+	```bash
+	$ chmod -R 777 runtime
+	$ chmod -R 777 web/assets
 	```
 
 Configure DB
